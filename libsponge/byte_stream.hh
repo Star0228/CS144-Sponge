@@ -2,6 +2,7 @@
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
 #include <string>
+#include <queue>
 
 //! \brief An in-order byte stream.
 
@@ -12,12 +13,18 @@ class ByteStream {
   private:
     // Your code here -- add private members as necessary.
 
+    size_t max = 0;
+    std::queue<char> queue = {};
+    bool input_end = false;
+    size_t sum_read = 0;
+    size_t sum_write = 0;
+    bool _error{};  //!< Flag indicating that the stream suffered an error.
+
     // Hint: This doesn't need to be a sophisticated data structure at
     // all, but if any of your tests are taking longer than a second,
     // that's a sign that you probably want to keep exploring
     // different approaches.
 
-    bool _error{};  //!< Flag indicating that the stream suffered an error.
 
   public:
     //! Construct a stream with room for `capacity` bytes.
@@ -80,6 +87,7 @@ class ByteStream {
     //! Total number of bytes popped
     size_t bytes_read() const;
     //!@}
+
 };
 
 #endif  // SPONGE_LIBSPONGE_BYTE_STREAM_HH
